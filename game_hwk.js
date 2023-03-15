@@ -1,5 +1,5 @@
 //on page load -> generate game board;
-window.onload = function(){
+window.onload = ()=>{
     console.log("Page Loaded")
     setRandomTileOrder(12);
     setTiles();
@@ -16,7 +16,7 @@ initiates game start on button press*/
 var startButton = document.getElementById("startGame")
 startButton.addEventListener("click", startGame);
 
-function startGame() {
+startGame=()=>{
     tiles.forEach(tile => tile.addEventListener("click", displayTile));
     resetTiles();
     startButton.disabled = true;
@@ -28,8 +28,8 @@ function startGame() {
 document.getElementById('endGame').addEventListener("click", endGame);
 
 
-function endGame() {
-    function endTimer() {
+endGame=()=>{
+    endTimer=()=>{
         timeScore = document.getElementById("timer").innerText;
         console.log(timeScore);
         clearInterval(timer);
@@ -45,7 +45,7 @@ function endGame() {
 creates random number which will later be assigned an icon
 creates an array of 12 random numbers*/
 var randomOrderArray = [];
-function setRandomTileOrder(numberOfTiles) {
+setRandomTileOrder=(numberOfTiles) =>{
     while (randomOrderArray.length < numberOfTiles) {
         var randomNum = Math.random();
         randomNum = randomNum * (numberOfTiles -1);
@@ -62,10 +62,11 @@ function setRandomTileOrder(numberOfTiles) {
 //Set tiles variable for use throughout code
 var tiles = document.querySelectorAll(".gametile");
 
-function setTiles(){
+setTiles=()=>{
     for(tile of tiles){
         tile.innerHTML = randomOrderArray[i];
         i++;
+
     //replace numerical values with icon pairs
 
     if (tile.innerText < 3) {
@@ -95,9 +96,9 @@ function setTiles(){
 //Timer Function -> starts timer when game is started end when game is compvare or game is cancelled.
 var count;
 
-function startTimer() {
+startTimer=()=> {
     clearInterval(timer); //clears timer before timer starts. This fixes issue if timer is triggered again, when already running. 
-    count = 0, timer = setInterval(function () {
+    count = 0, timer = setInterval(() =>{
         count = count++;
         document.getElementById("timer").firstChild.innerText = count++;
 
@@ -132,7 +133,7 @@ var tileIds =[];
 tiles.forEach(tile => tile.addEventListener("click", displayTile));
 var n = 0;
 
-function displayTile(e) {
+displayTile=(e) =>{
     
     //reveal tile by changing bg color and changing font-size from 0 to 3em;
     this.classList.remove("hideTile");
@@ -154,7 +155,7 @@ function displayTile(e) {
     }
 };
 
-function checkMatch(tileIcons, tileIds,n){
+checkMatch=(tileIcons, tileIds,n)=>{
     console.log(n);
     console.log(n+1);
         if(tileIcons[n] !== tileIcons[n+1]){
@@ -179,13 +180,13 @@ function checkMatch(tileIcons, tileIds,n){
 
 
 //countClicks -> calculates number of user clicks -> needed to calculate score
-function countMoves(){
+countMoves=()=>{
     clicks = n;
     document.getElementById("clicks").firstChild.innerHTML = clicks;
 }
 
 //ClearTiles -> Clear tiles when new game is started;
-function clearTiles(){
+clearTiles=()=>{
     for(var n = 0; n < tiles.length; n++){
         tiles[n].style.fontSize = "0em";
         tiles[n].style.backgroundColor = "#44445a";
@@ -200,7 +201,7 @@ if match icons remain displayed and correctly guessed tiles become disabled. */
 //compvareGAme -> When the number of correct answers == the number of cells the game can end.
 
 //calculateScore -> adds number of clicks and elapsed time to calculate score & displays score upon game compvarion. 
-function calculateScore(){
+calculateScore=()=>{
     timeScore = parseInt(timeScore);
     var calculatedScore = (timeScore + clicks);
     console.log(calculatedScore);
@@ -212,9 +213,9 @@ function calculateScore(){
 
 var newRGB;
 
-function generateRGBVal() {
+generateRGBVal=()=> {
 
-    function generateRandomColor() {
+    generateRandomColor=() =>{
         var r = Math.random();
         r = r * 255;
         r = Math.round(r);
@@ -234,7 +235,7 @@ function generateRGBVal() {
 // publish leaderboard;
 //use api to generate random icon or picture
 
-function resetTiles(){
+resetTiles=()=>{
     for(tile of tiles){
         tile.style.backgroundColor ="#44445a";
         tile.removeAttribute("state");
